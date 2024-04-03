@@ -1,0 +1,12 @@
+- Install node js 
+
+- Install vue-cli npm install -g @vue/cli
+
+- Create a vue project using vue/cli  npx vue create training
+
+- change directory "cd training" and run   "npm run serve"
+
+
+
+
+
