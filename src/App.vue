@@ -26,6 +26,7 @@ const displayNumber = (event) => {
   console.log(event);
   fromChildText.value = event;
 }
+
 </script>
 
 

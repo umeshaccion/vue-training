@@ -1,17 +1,17 @@
 <template>
-    <!-- Two way data binding -->
-    <input v-model="name">
+    Two way data binding
+    <!-- <input v-model="name">
     <div>{{ name }}</div>
-    <hr>
+    <hr> -->
     <!-- Event Handling -->
-    <input :value="name" @keyup="doSomething('This Is New input', $event)">
+    <!-- <input :value="name" @keyup="doSomething('This Is New input', $event)"> -->
 
-    <hr>
+    <!-- <hr>
     <div :style="{ 'font-size': fontSize + 'px' }"></div>
-    <div :class="{ 'addBackground': props.isActive }">COLOR IT</div>
-    <hr>
+    <div :class="{ 'addBackground': props.isActive }">COLOR IT</div> -->
+    <!-- <hr> -->
     <!-- for loop -->
-    <table>
+    <!-- <table>
         <thead>
             <tr>
                 <th>Name</th>
@@ -26,15 +26,15 @@
                 <td>{{ index }} {{ item.email }}</td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
     <ThridDay :isActive="props.isActive" />
 </template>
 
 <script setup>
-import { onMounted, ref, defineProps, defineEmits, onUpdated } from 'vue';
+import { onMounted, ref, defineProps } from 'vue';
 import ThridDay from '@/components/ThridDay.vue';
 const name = ref('Accionlabs');
-const fontSize = ref(22);
+// const fontSize = ref(22);
 // const isActive = ref(true)
 // const people = ref([
 //     { name: 'John Doe', age: 30, email: 'john@example.com' },
@@ -43,20 +43,18 @@ const fontSize = ref(22);
 // ]);
 
 const props = defineProps(['peopleProps', 'isActive']);
-const emits = defineEmits(['childToParent']);
+// const emits = defineEmits(['childToParent']);
 
 onMounted(() => {
     console.log(name);
 })
 
-onUpdated(() => {
-    console.log(name.value)
-})
-const doSomething = (event, type) => {
-    // console.log(event);
-    console.log(type);
-    emits('childToParent', type.target.value);
-}
+
+// const doSomething = (event, type) => {
+//     // console.log(event);
+//     console.log(type);
+//     emits('childToParent', type.target.value);
+// }
 
 </script>
 
