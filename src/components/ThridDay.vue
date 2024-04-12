@@ -1,4 +1,5 @@
 <template>
+    <input type="text" v-model="name">
     <div class="container">
         <div class="pageSizeDropdown">
             <label for="pageSize">Records per page:</label>
@@ -32,59 +33,73 @@
             <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
         </div>
     </div>
+    <div>
+        <h2>Name is {{ react1 }}</h2>
+        <div> <button @click="doSomething">click</button></div>
+        <h3>Count is {{ state.count }}</h3>
+    </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeMount, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from 'vue';
-// import { usePagination } from '@/use/usePagination.js';
-// const {
-//     paginatedposts.value,
-//     currentPage,
-//     totalPages,
-//     nextPage,
-//     prevPage,
-//     selectedPageSize,
-//     fetchData
-// } = usePagination();
-import axios from 'axios'; // Import Axios library
+import { onMounted, onBeforeMount, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, reactive, shallowRef } from 'vue';
+import { usePagination } from '@/use/usePagination.js';
+const {
+    paginatedposts,
+    currentPage,
+    totalPages,
+    nextPage,
+    prevPage,
+    selectedPageSize,
+    fetchData
+} = usePagination();
 
-const posts = ref([]);
-const currentPage = ref(1);
-const selectedPageSize = ref(10);
+// const posts = "I am good";
 
-const fetchData = async () => {
-    try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-        posts.value = response.data;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-};
+// const post1 = ref("I am good");
 
-const totalPages = computed(() => Math.ceil(posts.value.length / selectedPageSize.value));
+let react1 = reactive(30);
+const doSomething = () => react1 = 40;
 
-const paginatedposts = computed(() => {
-    const startIndex = (currentPage.value - 1) * selectedPageSize.value;
-    const endIndex = startIndex + selectedPageSize.value;
-    console.log(posts.value.slice(startIndex, endIndex));
-    return posts.value.slice(startIndex, endIndex);
-});
+//import axios from 'axios'; // Import Axios library
 
-const nextPage = () => {
-    if (currentPage.value < totalPages.value) {
-        currentPage.value++;
-    }
-};
+// const posts = ref([]);
+// const currentPage = ref(1);
+// const selectedPageSize = ref(10);
+// const name = ref("")
+// const fetchData = async () => {
+//     try {
+//         const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+//         posts.value = response.data;
+//     } catch (error) {
+//         console.error('Error fetching data:', error);
+//     }
+// };
 
-const prevPage = () => {
-    if (currentPage.value > 1) {
-        currentPage.value--;
-    }
-};
+// const totalPages = computed(() => Math.ceil(posts.value.length / selectedPageSize.value));
 
-const updatePageSize = () => {
-    currentPage.value = 1; // Reset current page to 1 when page size changes
-};
+// const paginatedposts = computed(() => {
+//     const startIndex = (currentPage.value - 1) * selectedPageSize.value;
+//     const endIndex = startIndex + selectedPageSize.value;
+//     console.log('Computed logic');
+//     return posts.value.slice(startIndex, endIndex);
+// });
+
+// const nextPage = () => {
+//     if (currentPage.value < totalPages.value) {
+//         currentPage.value++;
+//     }
+
+// };
+
+// const prevPage = () => {
+//     if (currentPage.value > 1) {
+//         currentPage.value--;
+//     }
+// };
+
+// const updatePageSize = () => {
+//     currentPage.value = 1; // Reset current page to 1 when page size changes
+// };
 
 onBeforeMount(() => console.log('Before Mount'));
 
@@ -140,4 +155,4 @@ onUnmounted(() => console.log('Unmounted'));
 .pagination span {
     margin: 0 10px;
 }
-</style>@/use/usePagination.js
+</style>

@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue';
 import axios from 'axios';
 
-export function usePagination() {
+export const usePagination = () => {
     const posts = ref([]);
     const currentPage = ref(1);
     const selectedPageSize = ref(10);
