@@ -34,14 +34,14 @@
         </div>
     </div>
     <div>
-        <h2>Name is {{ react1 }}</h2>
-        <div> <button @click="doSomething">click</button></div>
-        <h3>Count is {{ state.count }}</h3>
+        <h2 v-if="isActive">It is Thrid Day Component </h2>
+        <!-- <div> <button @click="doSomething">click</button></div>
+        <h3>Count is {{ state.count }}</h3> -->
     </div>
 </template>
 
 <script setup>
-import { onMounted, onBeforeMount, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, reactive, shallowRef } from 'vue';
+import { onMounted, onBeforeMount, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, inject } from 'vue';
 import { usePagination } from '@/use/usePagination.js';
 const {
     paginatedposts,
@@ -57,8 +57,10 @@ const {
 
 // const post1 = ref("I am good");
 
-let react1 = reactive(30);
-const doSomething = () => react1 = 40;
+// let react1 = reactive(30);
+// const doSomething = () => react1 = 40;
+const isActive = inject('isActive');
+console.log(isActive);
 
 //import axios from 'axios'; // Import Axios library
 

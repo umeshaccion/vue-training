@@ -2,58 +2,43 @@
   <div>
 
     <!-- // counter app  -->
-    <button @click="increment()"
+    <button @click="increment"
       style="width: 40px;background-color: green;border-radius: 5%;margin-right:10px;">+</button>
-    <input :value="counter" type="text" @change="changeValue()" />
-    <button @click="decrement()" style="width: 40px;background-color: red;border-radius: 5%;margin-left:10px">-</button>
+    <span>{{ counter }} </span>
+    <button @click="decrement" style="width: 40px;background-color: red;border-radius: 5%;margin-left:10px">-</button>
 
     <hr />
     <div v-if="isOdd">This number is odd {{ counter }}</div>
-    <div v-else-if="!isOdd && counter != 0">This number is even {{ counter }}</div>
-    <div v-show="isOdd"> v show This number is idd {{ counter }}</div>
-    <hr />
-    <div v-if="isOdd">This number is idd {{ counter }}</div>
-    <hr />
-    <!-- Javascript Expressions -->
-    <div> {{ counter + 1 }} </div>
-    <hr />
-    <div>{{ counter > 1 ? 'YES' : 'NO' }}</div>
-    <hr />
-    <div>{{ msg.split('').reverse().join('') }}</div>
-    <hr />
-    <div :id="`list-${id}`"></div>
-    <hr />
-    <!-- directives -->
-    <div v-text="msg"></div>
-    <!-- same as -->
-    <div>{{ msg }}</div>
-    <hr />
-    <div v-html="msgHTML"></div>
+
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
-const msg = "This is training, please concentrate.";
-const msgHTML = "<code>This is training..</code>"
-const id = 'unqiueID';
-const counter = ref(0);
-// const CounterReactive = reactive({ counter: 0 });
+// import { computed, ref } from 'vue';
+import { useCounterStore } from "@/store/counter";
+import { storeToRefs } from "pinia";
+const { counter, isOdd } = storeToRefs(useCounterStore()); //destructuring reactive items from the store
+const { increment, decrement } = useCounterStore(); //destructuring unreactive item from the store
+// const msg = "This is training, please concentrate.";
+// const msgHTML = "<code>This is training..</code>"
+// const id = 'unqiueID';
+// const counter = ref(0);
+// // const CounterReactive = reactive({ counter: 0 });
 
-const increment = () => {
-  console.log(counter.value);
-  counter.value++;
-}
-const decrement = () => counter.value--;
+// const increment = () => {
+//   console.log(counter.value);
+//   counter.value++;
+// }
+// const decrement = () => counter.value--;
 
-const isOdd = computed(displayOddnumber);
+// const isOdd = computed(displayOddnumber);
 
-const changeValue = () => console.log(counter.value);
+// const changeValue = () => console.log(counter.value);
 
-// const isOdd = displayOddnumber();
-function displayOddnumber() {
-  return counter.value % 2 != 0
-}
+// // const isOdd = displayOddnumber();
+// function displayOddnumber() {
+//   return counter.value % 2 != 0
+// }
 
 </script>
 

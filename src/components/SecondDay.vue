@@ -27,11 +27,11 @@
             </tr>
         </tbody>
     </table> -->
-    <ThridDay :isActive="props.isActive" />
+    <ThridDay />
 </template>
 
 <script setup>
-import { onMounted, ref, defineProps } from 'vue';
+import { onMounted, ref } from 'vue';
 import ThridDay from '@/components/ThridDay.vue';
 const name = ref('Accionlabs');
 // const fontSize = ref(22);
@@ -42,7 +42,7 @@ const name = ref('Accionlabs');
 //     { name: 'Bob Smith', age: 40, email: 'bob@example.com' }
 // ]);
 
-const props = defineProps(['peopleProps', 'isActive']);
+// const props = defineProps(['peopleProps']);
 // const emits = defineEmits(['childToParent']);
 
 onMounted(() => {

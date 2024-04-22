@@ -1,17 +1,22 @@
 <template>
 
-  <div style="height: 50px;">
+  <div style="height: 50px;" v-highlight="highlightColor">
     This is root page {{ fromChildText }}
   </div>
-  <!-- <CounterDisplay /> -->
-  <SecondDay :peopleProps="people" :isActive="isActive" @childToParent="displayNumber($event)" />
+  <CounterDisplay />
+  <!-- <SecondDay :peopleProps="people" @childToParent="displayNumber($event)" /> -->
+  <!-- <VuetifyDatatable /> -->
+  <!-- <CustomDirective /> -->
+
 </template>
 
 <script setup>
-
-import SecondDay from './components/SecondDay.vue';
-
-import { ref } from 'vue';
+import CounterDisplay from './components/CounterDisplay.vue';
+//import SecondDay from './components/SecondDay.vue';
+import VuetifyDatatable from './components/VuetifyDatatable.vue';
+import CustomDirective from './components/CustomDirective.vue';
+import { vHighlight } from './directives/highlightDirective.js';
+import { ref, provide } from 'vue';
 
 const people = ref([
   { name: 'John Doe', age: 30, email: 'john@example.com' },
@@ -19,13 +24,25 @@ const people = ref([
   { name: 'Bob Smith', age: 40, email: 'bob@example.com' }
 ]);
 
-let isActive = ref(true);
-let fromChildText = ref('')
+const name = "Umesh";
+const highlightColor = ref('Red');
 
-const displayNumber = (event) => {
-  console.log(event);
-  fromChildText.value = event;
-}
+// const ProvideData = {
+//   people: people,
+//   name: name,
+//   isActive: isActive
+// }
+
+// provide('provideData', ProvideData);
+// provide('name', true);
+// provide('isActive', true);
+
+// let fromChildText = ref('')
+
+// const displayNumber = (event) => {
+//   console.log(event);
+//   fromChildText.value = event;
+// }
 
 </script>
 
